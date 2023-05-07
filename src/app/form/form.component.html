@@ -1,12 +1,53 @@
-<div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem;">
-    <h5 class="card-title ">Pokedex</h5>
-    <img [src]="poke.img" class="card-img-top" id="img" alt="...">
+<div class="container text-center row position-absolute top-50 start-50 translate-middle ">
+ <div class="col">
+  <div class="card " style="width: 18rem;">
+    <h5 class="card-title ">{{poke.name | titlecase}}</h5>
+    <img [src]="img" class="card-img-top" id="img" alt="...">
     <div class="card-body">
-      <h5 class="card-title">Nome do pokemon Num#</h5>
-      <p class="card-text">altura, peso, habilidade, tipo, fraqueza</p>
+      <h5 class="card-title">Number: #{{poke.id}}</h5>
+      <p class="card-text">Type:
+        <span *ngFor="let currentTypes of poke.types" class="align-items-center"> {{currentTypes.type.name}}</span>
+      </p>
+      <p class="card-text">height: {{poke.height}} weight: {{poke.weight}}</p>
       <a href="#" class="btn btn-primary" (click)="Voltar()">Voltar</a>
       <a href="#" class="btn btn-primary" (click)="proximo()">Próximo</a>
     </div>
  </div>
+</div>
 
+<div class="col-md-8 ">
+ <div class="card" style="width: 18rem;">
+  <div class="card-body">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Stat</th>
+          <th scope="col">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let currentStats of poke.stats" >
+          <td>{{currentStats.stat.name | titlecase}}</td>
+          <td>{{currentStats.base_stat}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Abilities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currentAbility of poke.abilities">
+       <td>{{currentAbility.ability.name | titlecase}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+ </div>
+</div>
+</div>
 

@@ -8,7 +8,7 @@ import { Poke } from '../poke';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
+  img!: string
   id:number = 1;
   ids!:string;
   poke: Poke= {} as Poke;
@@ -20,20 +20,31 @@ export class FormComponent implements OnInit {
   }
 
   loadPoke(id:number) {
-  this.getImg();
   this.PokedexService.getPoke(id).subscribe({
-    next : poke => poke = poke
+    next : (data) => this.poke = data
   });
+  this.getImg();
   }
 
   proximo(){
+    if(this.id == 1008){
+      this.id = 1;
+      this.loadPoke(this.id);
+    }
+    else{
     this.id++;
     this.loadPoke(this.id);
+    }
   }
-
   Voltar(){
-    this.id--;
-    this.loadPoke(this.id);
+    if(this.id == 1){
+      this.id = 1008;
+      this.loadPoke(this.id);
+    }
+    else{
+      this.id--;
+      this.loadPoke(this.id);
+    }
   }
 
   getImg(){
@@ -47,7 +58,7 @@ export class FormComponent implements OnInit {
     else{
       this.ids = this.id.toString();
     }
-   return this.poke.img = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/"+ this.ids +".png";
+   return this.img = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/"+ this.ids +".png";
 
   }
 
